@@ -9,3 +9,31 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id        Int         @id @default(autoincrement())
+  userName  String      @unique
+  password  String
+  UserScore UserScore[]
+}
+
+model Level {
+  id     Int   @id @default(autoincrement())
+  width  Int
+  height Int
+  layout Bytes
+}
+
+model Score {
+  id        Int         @id @default(autoincrement())
+  value     Int
+  UserScore UserScore[]
+}
+
+model UserScore {
+  id      Int   @id @default(autoincrement())
+  user    User  @relation(fields: [userId], references: [id])
+  userId  Int
+  score   Score @relation(fields: [scoreId], references: [id])
+  scoreId Int
+}
