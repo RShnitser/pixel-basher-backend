@@ -21,7 +21,7 @@ scoreRouter.post(
         levelId: req.body.levelId,
       },
       orderBy: {
-        value: "asc",
+        value: "desc",
       },
       select: {
         user: {
