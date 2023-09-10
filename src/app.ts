@@ -35,3 +35,5 @@ app.use("/user", userRouter);
 app.use("/layout", layoutRouter);
 
 app.listen(3000);
+
+export default app;
