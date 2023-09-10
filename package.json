@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "npx nodemon",
     "seed": "ts-node --files prisma/seed.ts",
-    "vercel-build": "echo hello"
+    "vercel-build": "echo hello",
+    "postinstall": "prisma generate"
   },
   "author": "",
   "license": "ISC",
