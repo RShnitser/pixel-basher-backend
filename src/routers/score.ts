@@ -2,26 +2,23 @@ import { Router } from "express";
 import { prisma } from "../client";
 import { authMiddleWare } from "../utils";
 import { z } from "zod";
-import {
-  validateRequestParams,
-  validateRequestBody,
-} from "zod-express-middleware";
+import { validateRequestBody } from "zod-express-middleware";
 //import { validateParams } from "../utils";
 
 const scoreRouter = Router();
 
-scoreRouter.get(
-  "/",
+scoreRouter.post(
+  "/get",
   //function(req, res, next) {next()},
   //validateParams(z.object({ level: z.number() })),
   //validateParams(z.object({ level: z.number() }),
-  //authMiddleWare,
-  validateRequestParams(z.object({ levelId: z.number() })),
+  authMiddleWare,
+  validateRequestBody(z.object({ levelId: z.number() })),
 
   async (req, res) => {
     const scores = await prisma.score.findMany({
       where: {
-        levelId: req.params.levelId,
+        levelId: req.body.levelId,
       },
       orderBy: {
         value: "asc",
@@ -47,7 +44,7 @@ scoreRouter.get(
 );
 
 scoreRouter.post(
-  "/",
+  "/add",
   authMiddleWare,
   validateRequestBody(
     z.object({
