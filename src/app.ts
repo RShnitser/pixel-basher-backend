@@ -4,6 +4,7 @@ import { User } from "@prisma/client";
 import { userRouter } from "./routers/user";
 import { authRouter } from "./routers/auth";
 import { layoutRouter } from "./routers/layout";
+import { scoreRouter } from "./routers/score";
 
 declare global {
   namespace Express {
@@ -30,9 +31,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (req, res) => res.sendFile("../public/index.html"));
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
 app.use("/layout", layoutRouter);
+app.use("/score", scoreRouter);
 
 app.listen(3000);
 

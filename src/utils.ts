@@ -1,9 +1,9 @@
 import bcrypt from "bcrypt";
 import { User } from "@prisma/client";
 import jwt from "jsonwebtoken";
-import { z, ZodSchema, ZodType } from "zod";
+import { z } from "zod";
 import { Request, Response, NextFunction, RequestHandler } from "express";
-import { ParamsDictionary } from "express-serve-static-core";
+//import { ParamsDictionary } from "express-serve-static-core";
 import { prisma } from "./client";
 
 export const encryptPassword = (password: string) => {
