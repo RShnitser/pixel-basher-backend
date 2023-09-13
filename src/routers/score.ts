@@ -58,7 +58,7 @@ scoreRouter.post(
     }
 
     try {
-      const layouts = await prisma.score.create({
+      const score = await prisma.score.create({
         data: {
           userId: req.user.id,
           levelId: req.body.levelId,
@@ -66,7 +66,7 @@ scoreRouter.post(
         },
       });
 
-      res.status(200).send(layouts);
+      res.status(200).send({ name: req.user.userName, score: score.value });
     } catch {
       return res.status(500).send({ message: "Invalid data" });
     }
